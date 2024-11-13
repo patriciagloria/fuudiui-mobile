@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../widgets/left_drawer.dart';
+import '../widgets/product_card.dart';
 
 // Entry point of the application
 void main() {
@@ -31,8 +33,8 @@ class MyHomePage extends StatelessWidget {
   MyHomePage({super.key});
 
   final List<ItemHomepage> items = [
-    ItemHomepage("Lihat Daftar Produk", Icons.mood,Color(0xFFF6AE39)),
-    ItemHomepage("Tambah Produk", Icons.add,Color(0xFF409065)),
+    ItemHomepage("Lihat Daftar Produk", Icons.mood, Color(0xFFF6AE39)),
+    ItemHomepage("Tambah Produk", Icons.add, Color(0xFF409065)),
     ItemHomepage("Logout", Icons.logout, Color(0XFF374061)),
   ]; // Fixed: Added closing bracket and semicolon
 
@@ -50,7 +52,9 @@ class MyHomePage extends StatelessWidget {
           ),
         ),
         backgroundColor: Theme.of(context).colorScheme.primary,
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
+      drawer: const LeftDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         // Column to arrange widgets vertically
@@ -88,12 +92,14 @@ class MyHomePage extends StatelessWidget {
 
                   // GridView to display ItemCards
                   GridView.count(
-                    primary: false, // Changed to false to prevent scrolling issues
+                    primary:
+                        false, // Changed to false to prevent scrolling issues
                     padding: const EdgeInsets.all(20),
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10,
                     crossAxisCount: 3,
-                    shrinkWrap: true, // Ensures GridView takes only needed space
+                    shrinkWrap:
+                        true, // Ensures GridView takes only needed space
                     children: items.map((ItemHomepage item) {
                       return ItemCard(item);
                     }).toList(),
@@ -141,62 +147,6 @@ class InfoCard extends StatelessWidget {
             const SizedBox(height: 8.0),
             Text(content),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-// ItemHomepage model class
-class ItemHomepage {
-  final String name;
-  final IconData icon;
-  final Color color; // New property for button color
-
-
-  ItemHomepage(this.name, this.icon, this.color);
-}
-
-// ItemCard widget to display each item
-class ItemCard extends StatelessWidget {
-  final ItemHomepage item;
-
-  const ItemCard(this.item, {super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: item.color,
-      borderRadius: BorderRadius.circular(12),
-      child: InkWell(
-        onTap: () {
-          // Display a SnackBar when the card is tapped
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(
-              SnackBar(content: Text("Kamu telah menekan tombol ${item.name}!")),
-            );
-        },
-        child: Container(
-          padding: const EdgeInsets.all(8),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  item.icon,
-                  color: Colors.white,
-                  size: 30.0,
-                ),
-                const Padding(padding: EdgeInsets.all(3)),
-                Text(
-                  item.name,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(color: Colors.white,fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
         ),
       ),
     );
