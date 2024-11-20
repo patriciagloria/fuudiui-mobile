@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fuudiui/screens/list_productentry.dart';
 import '../screens/menu.dart';
 import '../screens/productentry_form.dart';
 
@@ -54,7 +55,7 @@ class LeftDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.mood),
             title: const Text('Tambah Produk'),
-            // Bagian redirection ke MoodEntryFormPage
+            // Bagian redirection ke ProductEntryFormPage
             onTap: () {
               Navigator.push(
                 context,
@@ -64,6 +65,17 @@ class LeftDrawer extends StatelessWidget {
               );
             },
           ),
+          ListTile(
+            leading: const Icon(Icons.add_reaction_rounded),
+            title: const Text('Daftar Produk'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const ProductEntryPage()),
+              );
+            },
+          )
         ],
       ),
     );
